@@ -1,0 +1,59 @@
+{% extends 'stepshop/base.html' %}
+{% load static %}
+{% load pic_tags %}
+
+{% block title %}Домашняя страница{% endblock %}
+
+{% block content %}
+    <!-- Page Content -->
+    <!-- Banner Starts Here -->
+    <div class="banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="caption">
+              <h2>Создать Продукт</h2>
+              <div class="line-dec"></div>
+              <p>Создайте свой продукт. Выберите категорию, названия, описание и картинку.</p>
+              <div class="main-button">
+                <a href="{% url 'products:create_product' %}">Создать</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Banner Ends Here -->
+
+    <!-- Featured Starts Here -->
+    <div class="featured-items">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <div class="line-dec"></div>
+              <h1>Featured Items</h1>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="owl-carousel owl-theme">
+
+              {% for product in products %}
+
+              <a href="{% url 'products:product' product.pk %}">
+                <div class="featured-item">
+                  <img src="{{ product.image|media_folder_products }}" alt="{{ product.short_desc }}">
+                  <h4>{{ product.name }}</h4>
+                  <h6>${{ product.price }}</h6>
+                </div>
+              </a>
+
+              {% endfor %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Featred Ends Here -->
+{% endblock %}
